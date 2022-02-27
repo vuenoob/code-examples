@@ -1,0 +1,78 @@
+<!--3 Directives [v-show, v-if, v-else-if, v-else, v-html, v-bind, v-on, v-model]-->
+<html>
+  <style>
+    #app{
+      margin-left: 50px;
+    }
+    .box{
+      height: 50px;
+      width: 100px;
+      padding: 20px;
+      margin: 10px;
+      background: lightgrey;
+    }
+    .light{
+      height: 50px;
+      width: 50px;
+      margin: 10px;
+      background: yellow;
+    }
+    label{
+      margin-left: 10px;
+    }
+  </style>
+  <body>
+  <div id="app">
+    <h1>Vue Directives</h1>
+    <h2>V-SHOW</h2>
+    <div class="box" v-show="isVisible">
+      Some Box
+    </div>
+    <br>
+
+    <h2>V-IF, V-ELSE, V-ELSE</h2>
+    <div v-if="someNumber < 33"> Less than 33 </div>
+    <div v-if="(someNumber >= 33) && (someNumber <= 66)"> Between 33 && 66 </div>
+    <div v-else>Greater than 66</div>
+    <br>
+
+    <h2>V-HTML</h2>
+    <div v-html="someHtml"></div>
+    <br>
+
+    <h2>V-BIND</h2>
+    <div v-bind:class="styleClass"></div>
+    <br>
+
+    <h2>V-ON</h2>
+    <button v-on:click="isOn = !isOn">Turn {{isOn ? 'Off' : 'On'}}</button>
+    <div class="light" v-show="isOn"></div>
+    <br>
+
+    <h2>V-MODEL</h2>
+    <input type="email" v-model="input">
+    <label>
+      {{ input }}
+    </label>
+  </div>
+
+  <script src="js/vue.global.js"></script>
+  <script>
+    let app = Vue.createApp({
+      data(){
+        return {
+          isVisible: true,
+          showList: false,
+          someNumber: 30,
+          someHtml: `<p> This is a HTML <strong>paragraph</strong> </p>`,
+          bgColor: 'green',
+          styleClass: 'box',
+          isOn: false,
+          input: ''
+        }
+      }
+    }); // new Vue instance
+    app.mount("#app"); // mount vue to DOM anything inside the "#app" selector part of the DOM tree is manipulated by Vue
+  </script>
+  </body>
+</html>
