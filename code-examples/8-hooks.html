@@ -1,0 +1,82 @@
+<!--6 Hooks-->
+<div id="app">
+  <ul>
+    <h1>Hello Hooks!</h1>
+    <li>beforeCreateVar -- {{ beforeCreateVar }}</li>
+    <li>createdVar -- {{ createdVar }}</li>
+    <li>beforeMountVar -- {{ beforeMountVar }}</li>
+    <li>mountedVar -- {{ mountedVar }}</li>
+    <li>beforeUpdateVar -- {{ beforeUpdateVar }}</li>
+    <li>updatedVar -- {{ updatedVar }}</li>
+    <li>beforeUnmountVar -- {{ beforeUnmountVar }}</li>
+    <li>unmountedVar -- {{ unmountedVar }}</li>
+    <li>someUpdate -- {{ someUpdate }}</li>
+  </ul>
+  <button @click.prevent="updateVars()">Update Var</button>
+  <button @click.prevent="navAway()">Exit</button>
+</div>
+
+<script src="js/vue.global.js"></script>
+<script>
+  var hooks = Vue.createApp({
+    data(){
+      return {
+        beforeCreateVar: "",
+        createdVar: "",
+        beforeMountVar: "",
+        mountedVar: "",
+        beforeUpdateVar: 0,
+        updatedVar: 0,
+        beforeUnmountVar: "",
+        unmountedVar: "",
+        someUpdate: 0
+      }
+    },
+    beforeCreate(){
+        this.beforeCreateVar = "YES"
+        alert("beforeCreate")
+    },
+    created(){
+        this.createdVar = "YES"
+        this.showAlert("created")
+    },
+    beforeMount() {
+        this.beforeMountVar = "YES"
+        this.showAlert("beforeMount")
+    },
+    mounted(){
+        this.mountedVar = "YES"
+        this.showAlert("mounted")
+    },
+    beforeUpdate(){
+        console.log("going to update!!")
+        this.showAlert("beforeUpdate")
+    },
+    updated(){
+      console.log("updated!!")
+        this.showAlert("updated")
+    },
+    beforeUnmount() {
+        this.beforeUnmountVar = "YES"
+        console.log("beforeUnmount")
+    },
+    unmounted(){
+        this.unmountedVar = "YES"
+        console.log("unmounted")
+    },
+    methods: {
+      updateVars(){
+        this.someUpdate += 1
+      },
+      showAlert(title){
+        alert(title)
+      },
+      navAway(){
+          location.href = "http://localhost:3000/hooks"
+      }
+    }
+  })
+  hooks.mount("#app")
+
+</script>
+
