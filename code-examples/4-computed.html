@@ -1,0 +1,59 @@
+<!--4 Computed Property-->
+<html>
+  <style>
+    form{
+      margin: 20px;
+    }
+    input{
+        margin: 10px;
+    }
+  </style>
+  <body>
+  <div id="app">
+    <form action="">
+      <label for="first-name">first Name: </label>
+      <input id="first-name" type="text" v-model="firstName">
+      <br>
+      <label for="last-name">Last Name: </label>
+      <input id="last-name" type="text" v-model="lastName">
+      <br>
+      <label for="age">Age: </label>
+      <input id="age" type="number" v-model="age">
+    </form>
+
+    <div>
+      Full Name: {{ fullName }}
+    </div>
+
+    <p>
+      {{ userInfo }}
+    </p>
+  </div>
+
+  <script src="js/vue.global.js"></script>
+  <script>
+    let app = Vue.createApp({
+      data(){
+        return {
+          firstName: '',
+          lastName: '',
+          age: 18,
+        }
+      },
+      computed: {
+        fullName() {
+          let complete = `${this.firstName} ${this.lastName}`;
+          console.log(complete);
+          return complete;
+        },
+        userInfo() {
+          let info = `My name is ${this.firstName} ${this.lastName}. I am ${this.age} years old.`;
+          console.log(info);
+          return info;
+        },
+      }
+    });
+    app.mount("#app");
+  </script>
+  </body>
+</html>
