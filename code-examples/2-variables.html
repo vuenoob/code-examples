@@ -1,0 +1,22 @@
+<!--2 Variables [declared in data function]-->
+<html>
+<body>
+  <div id="app">
+    <h1>Vue Variables</h1>
+    <div> This is a number: {{ someNumber }} </div>
+    <div> This is another number: {{ someNumber = 3 }} </div>
+  </div>
+
+  <script src="js/vue.global.js"></script>
+  <script>
+      let app = Vue.createApp({
+          data(){
+              return {
+                  someNumber: 0
+              }
+          }
+      }); // new Vue instance
+      app.mount("#app"); // mount vue to DOM anything inside the "#app" selector part of the DOM tree is manipulated by Vue
+  </script>
+</body>
+</html>
