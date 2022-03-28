@@ -1,0 +1,64 @@
+<div id="app">
+  <p> {{ personalInfo }} </p>
+  <p> {{ morePersonalInfo }} </p>
+  <p> {{ morePersonalInfoDelayed }} </p>
+</div>
+
+<hr>
+
+<div id="app2"> 
+  <p> {{ priceOfAnItem }} </p>
+</div>
+
+<script src="js/vue.global.js"></script>
+<script>
+  let app = Vue.createApp({
+    data: function () {
+      return {
+        firstName: 'Vue',
+        lastName: 'Noob',
+        age: 21,
+        locality: 'Vueland',
+        time: Date.now(),
+        morePersonalInfoDelayed: ''
+      };
+    },
+    computed: {
+      personalInfo(){
+        return `My name is ${this.firstName} ${this.lastName}, I am ${this.age} years old. I am based in ${this.locality}.`;
+      },
+      morePersonalInfo(){
+        return `I'll be travelling on ${new Date(this.time).toUTCString()}.`;
+      }
+    },
+    mounted(){
+      setTimeout(() => {
+        this.morePersonalInfoDelayed = this.morePersonalInfo;
+      }, 5000);
+    }
+  }).mount('#app');
+  
+  let app2 = Vue.createApp({
+    data: function () {
+      return {
+        item: 'Apple',
+        price: '2'
+      };
+    },
+    computed: {
+      priceOfAnItem: {
+        get(){
+          return `One ${this.item} costs ${this.price} dollars`;
+        },
+        set(resolvedVal){
+          [,this.item,,this.price,] = resolvedVal.split(' ');
+        }
+      }
+    },
+    mounted(){
+      setTimeout(() => {
+        this.priceOfAnItem = `One Orange costs 5 dollars`;
+      }, 3000);
+    }
+  }).mount('#app2');
+</script>
