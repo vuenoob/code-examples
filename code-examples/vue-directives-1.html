@@ -1,0 +1,34 @@
+<html lang="en-US">
+  <style>
+    .box{
+      background-color: coral;
+      width: 100px;
+      height: 100px;
+      margin: 20px;
+    }
+  </style>
+  <div id="app">
+    <div class="box" v-show="showBox"></div>
+  </div>
+  <script src="/js/vue.global.js"></script>
+  <script>
+    let app = Vue.createApp({
+      data() {
+        return {
+          showBox: true
+        }
+      },
+      mounted() {
+        const toggleVisibility = () => {
+          this.showBox = !this.showBox;
+        }
+        let intervalId = setInterval(toggleVisibility, 1000);
+        const stopToggle = () => {
+          this.showBox = true;
+          clearInterval(intervalId);
+        }
+        let timeoutId = setTimeout(stopToggle, 20000);
+      },
+    }).mount("#app");
+  </script>
+</html>
