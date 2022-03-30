@@ -1,0 +1,33 @@
+<html>
+  <div id="app">
+    <h1>{{ title }}</h1>
+    <div>
+      <h2>With v-html</h2>
+      <article v-html="htmlContent"></article>
+    </div>
+    <div>
+      <h2>without v-html</h2>
+      <article> {{ htmlContent }} </article>
+    </div>
+  </div>
+  <script src="/js/vue.global.js"></script>
+  <script>
+    let app = Vue.createApp({
+      data() {
+        return {
+          title: '',
+          htmlContent: ''
+        }
+      },
+      async mounted() {
+        await fetch('https://hacker-news.firebaseio.com/v0/item/121003.json?print=pretty')
+          .then((res) => res.json())
+          .then((res) => {
+            console.log(res);
+            this.htmlContent = res.text;
+            this.title = res.title;
+          })
+      },
+    }).mount("#app");
+  </script>
+</html>
