@@ -1,0 +1,32 @@
+<html>
+  <style>
+    meter{
+      height: 3em;
+      width: 15em;
+    }
+  </style>
+  
+  <div id="app">
+    <h1>City Water Flow Rate Levels</h1>
+    <h2>({{ level.toFixed() }} m³/hour)</h2>
+    <meter id="fuel" min="0" max="100" low="33" high="66" optimum="80" v-bind:value="level">
+    </meter> 
+    <br>
+  </div>
+  <script src="/js/vue.global.js"></script>
+  <script>
+    let app = Vue.createApp({
+      data() {
+        return {
+          level: 0
+        }
+      },
+      mounted() {
+        const fluctuateLevel = () => {
+          this.level = Math.random() * 15 + 60;
+        }
+        let intervalId = setInterval(fluctuateLevel, 200);
+      },
+    }).mount("#app");
+  </script>
+</html>
