@@ -1,0 +1,95 @@
+<html>
+<style>
+  section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .profit,
+  .loss {
+    padding: 2px;
+    color: white;
+  }
+
+  .reasonable {
+    color: black;
+  }
+
+  .loss {
+    background-color: red;
+  }
+
+  .loss.reasonable {
+    background-color: #ff7777;
+  }
+
+  .profit {
+    background-color: green;
+  }
+
+  .profit.reasonable {
+    background-color: #7bff6f;
+  }
+</style>
+
+<div id="app">
+  <h1>Monthly Sales</h1>
+  <section>
+    <div>
+      <h2>Vueland Store</h2>
+      <h3>Sales : ${{ storeOneSales.toLocaleString() }}</h3>
+      <h3>Profit : ${{ (storeOneSales - monthlyExpenditures).toLocaleString() }}</h3>
+      <span class="loss" v-if="!storeOneMadeProfit && storeOneBigMargin">Made a Big Loss</span>
+      <span class="loss reasonable" v-else-if="!storeOneMadeProfit && !storeOneBigMargin">Made Reasonable Loss</span>
+      <span class="profit" v-else-if="storeOneMadeProfit && storeOneBigMargin">Made a Big Profit</span>
+      <span class="profit reasonable" v-else>Made Reasonable Profit</span>
+    </div>
+    <div>
+      <h2>Vueland Megastore</h2>
+      <h3>Sales : ${{ (storeTwoSales).toLocaleString() }}</h3>
+      <h3>Profit : ${{ (storeTwoSales - monthlyExpenditures2).toLocaleString() }}</h3>
+      <span class="loss" v-if="storeTwoSales < monthlyExpenditures2">Made Loss</span>
+      <span class="profit" v-else>Made Profit</span>
+    </div>
+  </section>
+</div>
+
+<script src="/js/vue.global.js"></script>
+<script>
+  let app = Vue.createApp({
+    data() {
+      return {
+        articlePrice: 5,
+        monthlyExpenditures: 1000,
+        monthlyExpenditures2: 50000
+      }
+    },
+    computed: {
+      storeOneSales() {
+        return parseFloat(this.articlePrice * (Math.random() * 50 + 300).toFixed())
+      },
+      storeOneMadeProfit() {
+        return this.storeOneSales > this.monthlyExpenditures
+      },
+      storeOneBigMargin() {
+        return this.storeOneMadeProfit
+          ? this.storeOneSales - this.monthlyExpenditures > (0.25 * this.monthlyExpenditures)
+          : this.monthlyExpenditures - this.storeOneSales > (0.25 * this.monthlyExpenditures);
+      },
+      storeTwoSales() {
+        return parseFloat(((this.storeOneSales * 3) + (Math.random() * 20000) + 40000).toFixed())
+      },
+      storeTwoLossLevel() { },
+      storeTwoProfitLevel() { },
+    },
+    mounted() {
+      const fluctuateArticlePrice = () => {
+        this.articlePrice = (Math.random() * 2 + 2).toFixed();
+      }
+      let intervalId = setInterval(fluctuateArticlePrice, 2000);
+    },
+  }).mount("#app");
+</script>
+
+</html>
