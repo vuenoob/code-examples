@@ -1,0 +1,40 @@
+<html>
+  <style>
+    img {
+      margin: 1em;
+    }
+  </style>
+
+  <div id="app">
+    <section>
+      <h2>When viewer's age is {{ age }}yrs</h2>
+      <div v-bind:hidden="age < 13">
+        <h3>Allow to see PG and 13+ Movies</h3>
+        <img v-bind:src="moviePoster + '1'">
+        <img v-bind:src="moviePoster + '2'">
+      </div>
+      <div v-bind:hidden="age >= 13">
+        <h3>Allow to see PG Movie Only</h3>
+        <img v-bind:src="moviePoster + '2'">
+      </div>
+    </section>
+  </div>
+
+  <script src="/js/vue.global.js"></script>
+  <script>
+    let app = Vue.createApp({
+      data() {
+        return {
+          age: 0,
+          moviePoster: "https://picsum.photos/150/200?random="
+        }
+      },
+      mounted() {
+        const fluctuateAge = () => {
+          this.age = (Math.random() * 10 + 5).toFixed();
+        }
+        let intervalId = setInterval(fluctuateAge, 1500);
+      },
+    }).mount("#app");
+  </script>
+</html>
