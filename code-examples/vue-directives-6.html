@@ -2,12 +2,24 @@
   <div id="app">
     <h2>Using "in" delimiter</h2>
     <ul>
-      <li v-for="(fruit, key) in fruits">{{ fruit }}</li>
+      <li v-for="fruit in fruits">{{ fruit }}</li>
     </ul>
     <h2>Using "of" delimiter</h2>
     <ul>
+      <li v-for="fruit of fruits">
+          {{ fruit }}
+      </li>
+    </ul>
+    <h2>Accessing element's index variables</h2>
+    <ul>
       <li v-for="(fruit, index) of fruits">
-          {{ index }} -> {{ fruit }}
+          [{{ index }}] {{ fruit }}
+      </li>
+    </ul>
+    <h2>Accessing off-scope variables</h2>
+    <ul>
+      <li v-for="(fruit, index) of fruits">
+          {{ color }} {{ fruit }}
       </li>
     </ul>
   </div>
@@ -17,7 +29,8 @@
     let app = Vue.createApp({
       data() {
         return {
-          fruits: ['Oranges', 'Apples', 'Watermelons', 'Pears']
+          fruits: ['Oranges', 'Apples', 'Watermelons', 'Pears'],
+          color: "Red"
         }
       }
     }).mount("#app");
