@@ -1,0 +1,27 @@
+<html>
+  <div id="app">
+    <h2>Object - values iteration</h2>
+    <ul>
+      <li v-for="cat in categories">{{ cat }}</li>
+    </ul>
+    <h2>Object - Keys and Values</h2>
+    <ul>
+      <li v-for="(value, key) in categories">{{ key }}: {{ value }}</li>
+    </ul>
+    <h2>Object - Index, Keys and Values </h2>
+    <ul>
+      <li v-for="(value, key, index) in categories">[{{ index }}] {{ key }}: {{ value }}</li>
+    </ul>
+  </div>
+
+  <script src="/js/vue.global.js"></script>
+  <script>
+    let app = Vue.createApp({
+      data() {
+        return {
+          categories: {fruit: 'Orange', animal: 'Lion', vehicle: 'Mini-van', sport: 'Football'}
+        }
+      }
+    }).mount("#app");
+  </script>
+</html>
