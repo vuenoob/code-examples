@@ -1,0 +1,25 @@
+<html>
+  <div id="app">
+    <h2>Using "in" delimiter</h2>
+    <ul>
+      <li v-for="(fruit, key) in fruits">{{ fruit }}</li>
+    </ul>
+    <h2>Using "of" delimiter</h2>
+    <ul>
+      <li v-for="(fruit, index) of fruits">
+          {{ index }} -> {{ fruit }}
+      </li>
+    </ul>
+  </div>
+
+  <script src="/js/vue.global.js"></script>
+  <script>
+    let app = Vue.createApp({
+      data() {
+        return {
+          fruits: ['Oranges', 'Apples', 'Watermelons', 'Pears']
+        }
+      }
+    }).mount("#app");
+  </script>
+</html>
