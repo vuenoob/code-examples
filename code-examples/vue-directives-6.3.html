@@ -1,0 +1,41 @@
+<html>
+  <div id="app">
+    <h2>v-for with key attribute</h2>
+    <ul>
+      <li v-for="(employee, key) of employees" :key="key">
+        Name: {{ employee.name }} <br>
+        Role: {{ employee.role }} <br>
+        Experience: {{ employee.experience }} years
+        <br>
+        <br>
+      </li>
+    </ul>
+  </div>
+
+  <script src="/js/vue.global.js"></script>
+  <script>
+    let app = Vue.createApp({
+      data() {
+        return {
+          employees: [
+            {
+              name: "John Wick",
+              role: "Front-End Developer",
+              experience: 4
+            },
+            {
+              name: "Sylvester Stallone",
+              role: "Senior Developer",
+              experience: 8
+            },
+            {
+              name: "Mary Jane",
+              role: "Developer Relations",
+              experience: 2
+            }
+          ]
+        }
+      }
+    }).mount("#app");
+  </script>
+</html>
