@@ -1,0 +1,47 @@
+<html>
+  <div id="app">
+    <h2>Range</h2>
+    <ul>
+      <li v-for="num in 4"> {{ num }} </li>
+    </ul>
+    <hr>
+    <ul>
+      <li v-for="(num, index) in 4"> {{ index }}: {{ num }} </li>
+    </ul>
+    <hr>
+
+    <h2>Array</h2>
+    <ul>
+      <li v-for="fruit in fruits"> {{ fruit }} </li>
+    </ul>
+  </div>
+
+  <script src="/js/vue.global.js"></script>
+  <script>
+    let app = Vue.createApp({
+      data() {
+        return {
+          value: 5,
+          fruits: ['Oranges', 'Apples', 'Watermelons', 'Pears'],
+          tree: { branch: 70, leafs: 549}
+        }
+      },
+      computed: {
+        treeParts(){
+          return Object.keys(this.tree);
+        }
+      },
+      mounted(){
+        let item = 1;
+        const update = () => {
+          if(Object.keys(this.tree).length === 10){
+            clearInterval(id);
+          } else {
+            this.tree['new_'+ item++] = item;
+          }
+        }
+        let id = setInterval(update, 2000);
+      }
+    }).mount("#app");
+  </script>
+</html>
