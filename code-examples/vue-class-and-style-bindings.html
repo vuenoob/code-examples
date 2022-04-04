@@ -1,0 +1,23 @@
+<html>
+  <div id="app">
+    <div :style="`background-color: ${color}; height: ${size}; width: ${size}; padding: 10px`">
+      I am a box
+    </div>
+    <br>
+    <div style="padding: 10px" :style="`background-color: ${color}; height: ${size}; width: ${size}`">
+      I'm box 2
+    </div>
+  </div>
+
+  <script src="/js/vue.global.js"></script>
+  <script>
+    let app = Vue.createApp({
+      data() {
+        return {
+          size: 100,
+          color: 'cyan'
+        }
+      }
+    }).mount("#app");
+  </script>
+</html>
