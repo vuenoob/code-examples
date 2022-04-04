@@ -5,17 +5,22 @@
       height: 100px;
       border: 3px solid gainsboro;
       border-radius: 50%;
+      background-color: cornsilk;
     }
     .on{
       background-color: yellow;
     }
-    .off{
-      background-color: cornsilk;
-    }
   </style>
 
   <div id="app">
-    <div class="bulb" :class="isOn ? 'on' : 'off'">
+    <div class="bulb" :class="isOn ? 'on' : ''">
+    </div>
+    <br>
+    <h2>Binding to Objects</h2>
+    <div class="bulb" :class="{on: isOn}">
+    </div>
+    <br>
+    <div class="bulb" :style="{backgroundColor: onColor}">
     </div>
   </div>
 
@@ -24,7 +29,8 @@
     let app = Vue.createApp({
       data() {
         return {
-          isOn: true
+          isOn: true,
+          onColor: 'yellow'
         }
       }
     }).mount("#app");
