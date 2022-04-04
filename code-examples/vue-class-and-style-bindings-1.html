@@ -1,0 +1,32 @@
+<html>
+  <style>
+    .bulb{
+      width: 100px;
+      height: 100px;
+      border: 3px solid gainsboro;
+      border-radius: 50%;
+    }
+    .on{
+      background-color: yellow;
+    }
+    .off{
+      background-color: cornsilk;
+    }
+  </style>
+
+  <div id="app">
+    <div class="bulb" :class="isOn ? 'on' : 'off'">
+    </div>
+  </div>
+
+  <script src="/js/vue.global.js"></script>
+  <script>
+    let app = Vue.createApp({
+      data() {
+        return {
+          isOn: true
+        }
+      }
+    }).mount("#app");
+  </script>
+</html>
