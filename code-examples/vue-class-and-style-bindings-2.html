@@ -1,0 +1,83 @@
+<html>
+  <style>
+    .bulb{
+      width: 100px;
+      height: 100px;
+      border: 3px solid gainsboro;
+      background-color: cornsilk;
+    }
+    .round {
+      border-radius: 50%;
+    }
+    .on{
+      background-color: yellow;
+    }
+  </style>
+
+  <div id="app">
+    <h2>Binding to Objects with multiple properties</h2>
+    <div class="bulb" :class="{round: isRound, on: isOn}">
+    </div>
+    <br>
+    <div :style="{width: size + 'px', height: size + 'px', backgroundColor: offColor, 'border-radius': 50 + '%', borderWidth: 3 + 'px', borderColor: 'gainsboro', borderStyle: 'solid'}">
+    </div>
+
+    <h2>Binding to Objects with data properties</h2>
+    <div class="bulb" :class="squareBulbOn">
+    </div>
+    <br>
+    <div :style="roundBulbOff">
+    </div>
+
+    <h2>Binding to Objects from computed properties</h2>
+    <div class="bulb" :class="fenceLights">
+    </div>
+    <br>
+    <div :style="lawnLights">
+    </div>
+  </div>
+
+  <script src="/js/vue.global.js"></script>
+  <script>
+    let app = Vue.createApp({
+      data() {
+        return {
+          size: 100,
+          offColor: 'cornsilk',
+          isOn: true,
+          isRound: false,
+          squareBulbOn: {
+            on: true,
+            round: false
+          },
+          roundBulbOff: {
+            width: 100 + 'px',
+            height: 100 + 'px',
+            backgroundColor: 'cornsilk',
+            borderRadius: 50 + '%',
+            borderWidth: 3 + 'px',
+            borderColor: 'gainsboro',
+            borderStyle: 'solid'
+          },
+          dayLight: true
+        }
+      },
+      computed: {
+        fenceLights(){
+          return { on: this.dayLight, round: false }; 
+        },
+        lawnLights(){
+          return {
+            width: `${this.size}px`,
+            height: `${this.size}px`,
+            backgroundColor: this.dayLight ? this.offColor : 'yellow',
+            borderRadius: 50 + '%',
+            borderWidth: 3 + 'px',
+            borderColor: 'gainsboro',
+            borderStyle: 'solid'
+          }; 
+        }
+      }
+    }).mount("#app");
+  </script>
+</html>
