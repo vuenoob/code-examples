@@ -1,0 +1,96 @@
+<html>
+  <style>
+    .bulb{
+      width: 100px;
+      height: 100px;
+      border: 3px solid gainsboro;
+      background-color: cornsilk;
+    }
+    .round {
+      border-radius: 50%;
+    }
+    .on{
+      background-color: yellow;
+    }
+  </style>
+
+  <div id="app">
+    <h2>Binding to Arrays</h2>
+    <div :class="[bulb, roundBulb, lightsOn]">
+    </div>
+    <br>
+    <div :class="[bulb]" :style="[{backgroundColor: lightsOffColor}, {'border-radius': 50 + '%'}]">
+    </div>
+
+    <h2>Binding to Arrays with data properties</h2>
+    <div class="bulb" :class="squareBulbOn">
+    </div>
+    <br>
+    <div :style="roundBulbOff">
+    </div>
+
+    <h2>Binding to Arrays from computed properties</h2>
+    <div :class="fenceLights">
+    </div>
+    <br>
+    <div :style="lawnLights">
+    </div>
+  </div>
+
+  <script src="/js/vue.global.js"></script>
+  <script>
+    let app = Vue.createApp({
+      data() {
+        return {
+          size: 100,
+          bulb: 'bulb',
+          roundBulb: 'round',
+          lightsOn: 'on',
+          lightsOffColor: 'cornsilk',
+          lightsOnColor: 'yellow',
+          squareBulbOn: [
+            {on: true},
+            {round: false}
+          ],
+          roundBulbOff: [
+            {width: 100 + 'px'},
+            {height: 100 + 'px'},
+            {backgroundColor: 'cornsilk'},
+            {borderRadius: 50 + '%'},
+            {borderWidth: 3 + 'px'},
+            {borderColor: 'gainsboro'},
+            {borderStyle: 'solid'}
+          ],
+          dayLight: true,
+          fancyLights: false
+        }
+      },
+      computed: {
+        fenceLights(){
+          return [ this.bulb, {on: this.dayLight}, 'border-radius: 50%' ]; 
+        },
+        lawnLights(){
+          return [
+            `width: ${this.size}px`,
+            `height: ${this.size}px`,
+            'background-color: ' + (this.dayLight ? this.lightsOffColor : this.lightsOnColor),
+            {borderRadius: 50 + '%'},
+            {borderWidth: 3 + 'px'},
+            {borderColor: 'gainsboro'},
+            {borderStyle: 'solid'}
+          ]; 
+        }
+      },
+      mounted(){
+        const dayAndNight = () => {
+          if(this.fancyLights){
+            this.dayLight = !this.dayLight
+          } else {
+            clearInterval(toggleId);
+          }
+        }
+        let toggleId = setInterval(dayAndNight, 500)
+      }
+    }).mount("#app");
+  </script>
+</html>
