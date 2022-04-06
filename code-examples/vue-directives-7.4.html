@@ -1,0 +1,58 @@
+<html>
+  <div id="app">
+    <div v-if="!loggedIn">
+      <h2>User Login</h2>
+      <br>
+      <form action="">
+        <p v-show="validationError">Error: {{ validationError }}</p>
+        <label for="email">Email: </label>
+        <input type="email" id="email" v-model="email" required>
+        <br>
+        <br>
+        <label for="password">Password: </label>
+        <input type="text" id="password" v-model="password" required>
+        <br>
+        <br>
+        <button @click.prevent="logIn()">{{ loading ? 'loading..' : 'Log In' }}</button>
+      </form>
+    </div>
+
+    <div v-else>
+      <h2>Use Dashboard</h2>
+      <p>Successfully Logged In!</p>
+    </div>
+  </div>
+
+  <script src="/js/vue.global.js"></script>
+  <script>
+    let app = Vue.createApp({
+      data() {
+        return {
+          email: "",
+          password: "",
+          loggedIn: false,
+          validationError: "",
+          loading: false
+        }
+      },
+      methods: {
+        logIn(){
+          this.validationError = "";
+          let errorsCount = 0;
+          if(this.password.length < 4){
+            this.validationError = "Password is not valid";
+            errorsCount++;
+          }
+          const simulateAuthentication = () => {
+            this.loading = false;
+            this.loggedIn = true;
+          }
+          if(errorsCount === 0){
+            this.loading = true;
+            setTimeout(simulateAuthentication, 3500);
+          }
+        }
+      }
+    }).mount("#app");
+  </script>
+</html>
