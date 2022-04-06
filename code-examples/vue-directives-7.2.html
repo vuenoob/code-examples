@@ -1,0 +1,25 @@
+<html>
+  <div id="app">
+    <h2>Count: {{ num }}</h2>
+    <button v-on:click="num++">Increment</button>
+    <hr>
+    <input type="text" v-model="text" v-on:blur="text = text + ' a'">
+
+    <h2>Using the shorthand</h2>
+    <button @click="num++">Increment</button>
+    <hr>
+    <input type="text" v-model="text" @blur="text = text + ' a'">
+  </div>
+
+  <script src="/js/vue.global.js"></script>
+  <script>
+    let app = Vue.createApp({
+      data() {
+        return {
+          num: 0,
+          text: 'Hello!'
+        }
+      }
+    }).mount("#app");
+  </script>
+</html>
