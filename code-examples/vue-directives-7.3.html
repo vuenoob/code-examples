@@ -1,0 +1,37 @@
+<html>
+  <div id="app">
+    <h2>Count: {{ num }}</h2>
+    <button @click="increment()">Increment</button>
+    <hr>
+    <input type="text" v-model="text" @blur="appendText()">
+    <hr>
+    num + length of text: {{ numPlusText }}
+  </div>
+
+  <script src="/js/vue.global.js"></script>
+  <script>
+    let app = Vue.createApp({
+      data() {
+        return {
+          num: 0,
+          text: 'Hello!'
+        }
+      },
+      computed: {
+        numPlusText(){
+          return this.num + this.text.length;
+        }
+      },
+      methods: {
+        increment(val){
+          this.num++;
+          console.log(this.numPlusText);
+        },
+        appendText(){
+          this.text = this.text + ' a';
+          console.log(this.numPlusText);
+        }
+      }
+    }).mount("#app");
+  </script>
+</html>
