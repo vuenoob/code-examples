@@ -1,0 +1,21 @@
+<html>
+  <div id="app">
+    <h2>Cool Form {{ name.length }}</h2>
+    <form>
+      <input type="text" v-model="name">
+      <br>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <script src="/js/vue.global.js"></script>
+  <script>
+    let app = Vue.createApp({
+      data() {
+        return {
+          name: "",
+        }
+      }
+    }).mount("#app");
+  </script>
+</html>
