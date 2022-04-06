@@ -1,0 +1,86 @@
+<html>
+  <style>
+    legend{
+      padding: 5px;
+      margin: 2px 0;
+      background-color: seashell;
+    }
+  </style>
+  <div id="app">
+    <h2>Login Form</h2>
+    <form>
+      <legend>Text Input</legend>
+      <input type="text" v-model="msg">
+      <br>
+      {{ msg }}
+      <hr>
+      <legend>Textarea Input</legend>
+      <textarea v-model="longMsg"></textarea>
+      <br>
+      <p>{{ longMsg }}</p>
+      <hr>
+      <legend>Number Input</legend>
+      <input type="number" v-model="someNumber">
+      <br>
+      {{ someNumber }}
+      <hr>
+      <legend>Select Field</legend>
+      <label for="age-select">How old are you?</label>
+      <select id="age-select" v-model="selectedAge">
+        <option v-for="item in options" :value="item.key">{{ item.label }}</option>
+      </select>
+      <br>
+      {{ selectedAge }}
+      <hr>
+      <legend>Dial Field</legend>
+      <label for="dials">Are you a Vue Noob?</label>
+      <label>
+        <input type="radio" id="dials" v-model="isANoob" value="Yes I am"> Yes
+      </label>
+      <label>
+        <input type="radio" id="dials9" v-model="isANoob" value="Not I'm not"> No
+      </label>
+      <br>
+      {{ isANoob }}
+      <hr>
+      <legend>Checkboxes</legend>
+      <label for="chk-one">What Web technologies are you familiar with?</label>
+      <label>
+        <input type="checkbox" v-model="chkOne"> HTML
+      </label>
+      <label>
+        <input type="checkbox" v-model="chkTwo"> JavaScript
+      </label>
+      <label>
+        <input type="checkbox" v-model="chkThree"> CSS
+      </label>
+      <br>
+      HTML: {{ chkOne }} JavaScript: {{ chkTwo }} CSS: {{ chkThree }}
+    </form>
+  </div>
+
+  <script src="/js/vue.global.js"></script>
+  <script>
+    let app = Vue.createApp({
+      data() {
+        return {
+          msg: "Hello, World!",
+          longMsg: "This is a very loooooooooooooooooooooooooooooooooooooooooooooooooooooooong paragraph.",
+          someNumber: 0,
+          options: [{key: 12, label: '12yrs'}, {key: 14, label: '14 yrs'}],
+          selectedAge: 0,
+          isANoob: "Yes I am",
+          chkOne: true,
+          chkTwo: false,
+          chkThree: false
+        }
+      },
+      mounted(){
+        let addRandomText = () => {
+          this.msg = this.msg + " other text!"
+        }
+        setTimeout(addRandomText, 3000);
+      }
+    }).mount("#app");
+  </script>
+</html>
