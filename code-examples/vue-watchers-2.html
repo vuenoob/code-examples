@@ -1,0 +1,47 @@
+<html>
+  <div id="app">
+    <h2>Login Form</h2>
+    <form>
+      <label for="age-select">Fruit Search</label>
+      <br>
+      <input type="text" v-model="fruit" style="padding: 3; font-size: 20">
+      <br>
+      <p v-if="suggestion">Are you looking for {{ suggestion }}?</p>
+    </form>
+  </div>
+
+  <script src="/js/vue.global.js"></script>
+  <script>
+    let app = Vue.createApp({
+      data() {
+        return {
+          fruit: "",
+          database: ['Oranges', 'Pineapples', 'Papayas', 'Tomatoes', 'Mangoes'],
+          suggestion: ""
+        }
+      },
+      watch: {
+        fruit(newVal, oldVal){
+          console.log(newVal, oldVal);
+          if(newVal.length >= 3){
+            this.queryFruitDB();
+          }
+        }
+      },
+      methods: {
+        queryFruitDB(){
+          this.suggestion = "";
+          const fruitSearch = () => {
+            let allFruits = this.database
+              .forEach(x => {
+                if((x.toLowerCase()).includes(this.fruit.toLowerCase())){
+                  this.suggestion = x;
+                }
+              })
+          }
+          setTimeout(fruitSearch, 1000);
+        }
+      }
+    }).mount("#app");
+  </script>
+</html>
