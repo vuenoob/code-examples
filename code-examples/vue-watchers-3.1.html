@@ -1,0 +1,44 @@
+<html>
+  <div id="app">
+    <h2>Sort By Scores</h2>
+    <br>
+    <p v-for="(student, key) in students" :key="key">
+      Name: {{ student.name }} <br>
+      <input type="number" v-model.number="student.score">
+    </p>
+  </div>
+
+  <script src="/js/vue.global.js"></script>
+  <script>
+    let app = Vue.createApp({
+      data() {
+        return {
+          students: [{
+            name: "Noob",
+            score: 90
+          },{
+            name: "John",
+            score: 100
+          }]
+        }
+      },
+      watch: {
+        students: {
+          handler(){
+            this.sortStudents();
+          },
+          deep: true,
+          immediate: true
+        }
+      },
+      methods: {
+        sortStudents(){
+          const sortAll = () => {
+            this.students.sort((a, b) => b.score - a.score);
+          }
+          setTimeout(sortAll, 2000)
+        }
+      },
+    }).mount("#app");
+  </script>
+</html>
