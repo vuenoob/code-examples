@@ -1,0 +1,30 @@
+<html>
+  <div id="app">
+    <h2>Login Form</h2>
+    <form>
+      <label for="age-select">How old are you? </label>
+      <select id="age-select" v-model="myAge">
+        <option v-for="(num, key) in 30" :value="num" :key="num">{{ num }} yrs</option>
+      </select>
+      <hr>
+      <p v-show="myAge > 0">{{ comment }}</p>
+    </form>
+  </div>
+
+  <script src="/js/vue.global.js"></script>
+  <script>
+    let app = Vue.createApp({
+      data() {
+        return {
+          myAge: 0,
+          comment: ""
+        }
+      },
+      watch: {
+        myAge(newVal, oldVal){
+          this.comment = newVal >= 18 ? "You are too old to be lazy." : "The future is your canvas.";
+        }
+      }
+    }).mount("#app");
+  </script>
+</html>
