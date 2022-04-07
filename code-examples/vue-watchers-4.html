@@ -1,0 +1,39 @@
+<html>
+  <div id="app">
+    <h2>Conditional Watchers</h2>
+    <br>
+    <label for="makes">Makes: </label>
+    <select id="makes" v-model="selectedCarMake">
+      <option v-for="(make, key) in allMakes" :key="key">{{ make }}</option>
+    </select>
+    <br>
+    <label for="models">Models: </label>
+    <select id="models" v-model="selectedCarModel">
+      <option v-for="(model, key) in modelsToChooseFrom" :key="key">{{ model }}</option>
+    </select>
+  </div>
+
+  <script src="/js/vue.global.js"></script>
+  <script>
+    let app = Vue.createApp({
+      data() {
+        return {
+          allMakes: ["Mazda", "Hyundai"],
+          selectedCarMake: "",
+          selectedCarModel: "",
+          mazdaModels: ["Mazda 3", "Mazda CX-5"],
+          hyundaiModels: ["Santa Fe", "Biante"],
+          modelsToChooseFrom: [],
+        }
+      },
+      mounted(){
+        let unwatch = this.$watch('selectedCarMake', (newVal) => {
+          if(newVal){
+            this.modelsToChooseFrom = newVal === "Mazda" ? this.mazdaModels : this.hyundaiModels;
+            unwatch();
+          }
+        })
+      }
+    }).mount("#app");
+  </script>
+</html>
