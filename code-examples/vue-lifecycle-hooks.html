@@ -1,0 +1,61 @@
+<div id="app">
+  <h1>Vue Lifecyle Hooks</h1>
+  <ul style="display: flex; gap: 10px; flex-direction: column;">
+    <li>beforeCreateVar: <strong>{{ beforeCreateVar }}</strong></li>
+    <li>createdVar: <strong>{{ createdVar }}</strong></li>
+    <li>beforeMountVar: <strong>{{ beforeMountVar }}</strong></li>
+    <li>mountedVar: <strong>{{ mountedVar }}</strong></li>
+    <li>someUpdate: <strong>{{ someUpdate }}</strong></li>
+  </ul>
+  <button @click="updateState()">Update State</button>
+
+</div>
+
+<script src="js/vue.global.js"></script>
+<script>
+  let hooks = Vue.createApp({
+    data(){
+      return {
+        beforeCreateVar: "No Changes!",
+        createdVar: "No Changes!",
+        beforeMountVar: "No Changes!",
+        mountedVar: "No Changes!",
+        someUpdate: 0,
+      }
+    },
+    beforeCreate(){
+      console.log("1. beforeCreate");
+      // this.updateState();
+      this.beforeCreateVar = "changed!";
+    },
+    created(){
+      this.createdVar = "changed!";
+      console.log("2. created");
+    },
+    beforeMount() {
+      this.beforeMountVar = "changed!";
+      console.log("3. beforeMount");
+    },
+    mounted(){
+      this.mountedVar = "changed!";
+      console.log("4. mounted");
+    },
+    beforeUpdate(){
+      console.log("5. beforeUpdate");
+      // console.log("someUpdate, first: ", this.someUpdate);
+      // this.someUpdate++;
+      // console.log("someUpdate, second: ", this.someUpdate);
+    },
+    updated(){
+      console.log("6. updated");
+      // console.log("someUpdate: ", this.someUpdate);
+      // this.someUpdate++;
+    },
+    methods: {
+      updateState(){
+        this.someUpdate++;
+      }
+    }
+  }).mount("#app")
+
+</script>
