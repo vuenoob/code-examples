@@ -17,7 +17,7 @@
             retired: false
           },{
             name: "Boeing 747",
-            flightHours: 74000,
+            flightHours: "74000",
             // retired: true
           }]
         }
@@ -32,7 +32,7 @@
         },
         flightHours: {
           type: Number,
-          default: 0,
+          default: 1,
           validator: (val) => val >= 1 
         },
         retired: {
