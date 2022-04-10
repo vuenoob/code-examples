@@ -1,0 +1,18 @@
+<!--4 Computed Property-->
+<html>
+  <div id="app">
+    <ul>
+      <list-item v-for="(num, key) in 100" :key="key" :item-name="num" >{{ num }}</list-item>
+    </ul>
+  </div>
+
+  <script src="js/vue.global.js"></script>
+  <script>
+    let app = Vue.createApp({});
+    app.component('list-item', {
+      template: `<li> {{ itemName }} </li>`,
+      props: ['itemName']
+    })
+    app.mount("#app");
+  </script>
+</html>
