@@ -1,0 +1,55 @@
+<!-- The Emit Function with Event Arguments -->
+<html>
+  <div id="app">
+    <h3>Top Podcasts</h3>
+    <ol>
+      <list-item v-for="(podcast, key) of podcasts" :key="key" :name="podcast.podcast" :votes="podcast.votes" @up-vote="(votesCount) => podcast.votes += votesCount" ></list-item>
+    </ol>
+  </div>
+
+  <script src="js/vue.global.js"></script>
+  <script>
+    let app = Vue.createApp({
+      data(){
+        return {
+          podcasts: [{
+            votes: 1,
+            podcast: "The Vuenoob Podcast"
+          },{
+            votes: 2,
+            podcast: "Not So Important"
+          }]
+        }
+      },
+      watch: {
+        podcasts: {
+          handler(){
+            this.podcasts.sort((a, b) => b.votes - a.votes);
+          },
+          deep: true, 
+          immediate: true
+        }
+      }
+    });
+    app.component('list-item', {
+      template: `<li> {{ name }} ({{ votes }} votes) <span><input type="number" v-model.number="voteCount"><button @click="$emit('up-vote', voteCount)">Vote</button></span></li>`,
+      props: {
+        name: {
+          type: String,
+          default: 'Unknown Podcast',
+        },
+        votes: {
+          type: Number,
+          default: 1,
+          validator: (val) => val >= 0
+        }
+      },
+      data(){
+        return {
+          voteCount: 1
+        }
+      }
+    })
+    app.mount("#app");
+  </script>
+</html>
