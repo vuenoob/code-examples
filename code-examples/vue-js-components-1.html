@@ -1,0 +1,53 @@
+<!--4 Computed Property-->
+<html>
+  <div id="app">
+    <ul>
+      <list-item v-for="(craft, key) of aircraft" :key="key" :name="craft.name" :flight-hours="craft.flightHours" :retired="craft.retired" >{{ num }}</list-item>
+    </ul>
+  </div>
+
+  <script src="js/vue.global.js"></script>
+  <script>
+    let app = Vue.createApp({
+      data(){
+        return {
+          aircraft: [{
+            // name: "Airbus A380",
+            flightHours: 0,
+            retired: false
+          },{
+            name: "Boeing 747",
+            flightHours: 74000,
+            // retired: true
+          }]
+        }
+      }
+    });
+    app.component('list-item', {
+      template: `<li> {{ name }}: Flown {{ flightHours }} hours{{ isRetired }} </li>`,
+      props: {
+        name: {
+          type: String,
+          default: 'Unknown Aircraft',
+        },
+        flightHours: {
+          type: Number,
+          default: 0,
+          validator: (val) => val >= 1 
+        },
+        retired: {
+          type: Boolean
+        }
+      },
+      computed: {
+        isRetired(){
+          return this.retired ? ", Already Retired." : ", Still in service."
+        }
+      },
+      // computed(){
+      //   this.flightHours += 1;
+      // }
+    })
+    app.mount("#app");
+  </script>
+</html>
